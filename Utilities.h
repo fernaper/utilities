@@ -2,9 +2,9 @@
  *	External library: Utilities.h
  *	______________________________
  *
- *	By: Kramez
+ *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.0.1
+ *	Current version: v0.0.2
  *	______________________________
  *	
  *	COPYRIGHT ©
@@ -130,6 +130,8 @@ double u_stod (const std::string &text, const char decimal)
 	return sol;
 }
 
+/// Given a text and a separator, returns the number of words separeted by the separator.
+/// If comes an string with only the separator it will return 2 (becouse exist two empty sides)
 unsigned int u_words (const std::string &text, const char separator)
 {
 	unsigned int num = 0, i = 0;
@@ -144,7 +146,9 @@ unsigned int u_words (const std::string &text, const char separator)
 	return num;
 }
 
-void u_split (std::string array[], std::string text, const unsigned int words, const char separator)
+/// Given an empty array, a text, the maximum number of words, and the separator, it will give ou an array with one word in each position.
+/// Alsa it will return the number of words that he use.
+unsigned int u_split (std::string array[], std::string text, const unsigned int words, const char separator)
 {
 	unsigned int count = 0;
 	std::size_t found;
@@ -155,8 +159,12 @@ void u_split (std::string array[], std::string text, const unsigned int words, c
 		text.erase(0, found+1);
 		count++;		
 	} while (found != std::string::npos && count < words);
+	
+	return count;
 }
 
+/// Given an empty array, a text, and the separator, it will give you an array with one word in each position.
+/// Alsa it will return the number of words that he use.
 unsigned int u_split (std::string array[], std::string text, const char separator)
 {
 	unsigned int count = 0;
