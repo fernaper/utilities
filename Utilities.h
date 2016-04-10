@@ -13,7 +13,7 @@
  *	It is free to use, but give credit used.
  * 	
  *	Example of minimum credits:
- *	Library Utilities.h made by Kramez
+ *	Library Utilities.h made by TheCorPlay
  *	you can find this and more done
  *	for him here:
  *
