@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.0.2
+ *	Current version: v0.0.3
  *	______________________________
  *	
  *	COPYRIGHT ©
@@ -130,6 +130,28 @@ double u_stod (const std::string &text, const char decimal)
 	return sol;
 }
 
+std::string u_itostr (int number)
+{
+	std::string sol = "";
+	bool positive = true;
+	
+	if (number < 0) {
+		positive = false;
+		number = -number;
+	}
+	
+	while (number != 0) {
+		unsigned int digit = number %10;
+		number = number/10;
+		sol = (char)(digit+48) + sol;
+	}
+	
+	if (!positive)
+		sol = '-' + sol;
+	
+	return sol;
+}
+
 /// Given a text and a separator, returns the number of words separeted by the separator.
 /// If comes an string with only the separator it will return 2 (becouse exist two empty sides)
 unsigned int u_words (const std::string &text, const char separator)
@@ -194,7 +216,9 @@ unsigned int u_split (std::string array[], std::string text, const char separato
 	for (unsigned int i = 0; i < words; i++)
 		op = op + u_cstoi (array[i]);
 		
-	std::cout << op << "\n";
+	std::cout << "Problem 1: " << op << "\n";
+	
+	//-------------------
 	
 	return 0;
 }*/
