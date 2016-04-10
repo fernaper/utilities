@@ -130,6 +130,7 @@ double u_stod (const std::string &text, const char decimal)
 	return sol;
 }
 
+/// Given an integer, return the equivalent string. (ITOSTR = Integer to string)
 std::string u_itostr (int number)
 {
 	std::string sol = "";
