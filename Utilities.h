@@ -31,7 +31,7 @@
 #define _UTILITIES_H
 
 #include <string>
-#include <iostream>
+//#include <iostream>
 
 /// Given two integers (the base and the exponent) returns a to the power of b
 long int u_exponents(int a, int b)
