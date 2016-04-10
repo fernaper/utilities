@@ -24,7 +24,7 @@
  *	
  *	 +	Conversions of all possible
  *		standard types in both directions.
- *	 +	Various types of generic searches.
+ *	 +	Various types of generic searches (Binary done).
  *
 */
 #ifndef _UTILITIES_H_
