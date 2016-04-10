@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.0.3
+ *	Current version: v0.0.4
  *	______________________________
  *	
  *	COPYRIGHT ©
@@ -169,7 +169,7 @@ unsigned int u_words (const std::string &text, const char separator)
 	return num;
 }
 
-/// Given an empty array, a text, the maximum number of words, and the separator, it will give ou an array with one word in each position.
+/// Given an empty array of strings, a text, the maximum number of words, and the separator, it will give ou an array with one word in each position.
 /// Also it will return the number of words that he use.
 unsigned int u_split (std::string array[], std::string text, const unsigned int words, const char separator)
 {
@@ -186,7 +186,7 @@ unsigned int u_split (std::string array[], std::string text, const unsigned int 
 	return count;
 }
 
-/// Given an empty array, a text, and the separator, it will give you an array with one word in each position.
+/// Given an empty array of strings, a text, and the separator, it will give you an array with one word in each position.
 /// Also it will return the number of words that he use.
 unsigned int u_split (std::string array[], std::string text, const char separator)
 {
@@ -204,22 +204,67 @@ unsigned int u_split (std::string array[], std::string text, const char separato
 	return words;
 }
 
+/// Given an array of any type, something that you are searching on the array (Binary Search), the space who we search and an empty postion.
+/// The variable pos returns the position where it is or should be if not found.
+/// The method returns if you found it or not
+template <class TYPE>
+bool u_search(TYPE list[], TYPE search, int count, int &pos) {
+  int start = 0, end = count - 1, half;
+  bool found = false;
+
+	while ((start <= end) && !found) {
+		half = (start + end) / 2;
+		if (search == list[half])
+			found = true;
+		else if (search < list[half])
+			end = half - 1;
+		else
+			start = half + 1;
+	}
+	
+	if (found)
+		pos = half;
+	else
+		pos = start;
+		
+	return found;
+}
+
+
 /*int main ()
 {
-	std::string text = "256x256";
-	unsigned int words = u_words (text, 'x');
-	std::string array[words];
-	
-	u_split (array,text,words,'x');
-	
-	int op = 0;
-	
-	for (unsigned int i = 0; i < words; i++)
-		op = op + u_cstoi (array[i]);
+	// Problem 1: Obtain the addition of all values separated by a specific symbol (not the others).
+	{
+		std::string text = "a1b2+c5d+e2f3g"; // It means: "12+5+23" = 40
+		unsigned int words = u_words (text, '+');
+		std::string array[words];
 		
-	std::cout << "Problem 1: " << op << "\n";
-	
-	//-------------------
+		u_split (array,text,words,'+');
+		
+		int op = 0;
+		
+		for (unsigned int i = 0; i < words; i++)
+			op = op + u_cstoi (array[i]);
+			
+		std::cout << "Problem 1: " << op << "\n";
+	}
+	// Problem 2: Obtain the position of a value in a generic array.
+	{
+		unsigned int count = 10;
+		int array [count];
+		
+		for (unsigned int i = 0; i < count; i++)
+			array[i] = i*3; // [ 0 3 6 9 12 15 18 21 24 27]
+		
+		int pos;
+		if (u_search (array, 9, count, pos)) { // We search for the position of the number 9
+			std:: cout << "Problem 2 (a): " << array[pos] << " in the position " << pos << "\n";
+		}
+		
+		if (u_search (array, 17, count, pos)) { // We search for the position of the number 17
+			std:: cout << "Problem 2 (b): " << array[pos] << " in the position " << pos << "\n";
+		}
+	}
 	
 	return 0;
 }*/
