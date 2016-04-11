@@ -24,20 +24,17 @@
  *	
  *	 +	Conversions of all possible
  *		standard types in both directions.
-<<<<<<< HEAD
  *	 +	Various types of generic searches (Binary done).
-=======
- *	 +	Various types of generic searches (Binary done) ^^.
->>>>>>> origin/master
+ *	 +	New u_eraseAll() but with an String (not only a char).
  *
 */
 #ifndef _UTILITIES_H_
 #define _UTILITIES_H
 
 #include <string>
-//#include <iostream>
+#include <iostream>
 
-/// Given two integers (the base and the exponent) returns a to the power of b
+/// Given two integers (the base and the exponent) returns a to the power of b.
 long int u_exponents(int a, int b)
 {
 	if (b <= 0)
@@ -46,7 +43,7 @@ long int u_exponents(int a, int b)
 		return a*u_exponents(a,b-1);
 }
 
-/// Given a string returns an integer ignoring any other character (CSTOI = Controlled string to int)
+/// Given a string returns an integer ignoring any other character. (CSTOI = Controlled string to int)
 int u_cstoi (const std::string &text)
 {
 	unsigned int i = 0;
@@ -69,7 +66,7 @@ int u_cstoi (const std::string &text)
 	return sol;
 }
 
-/// Given a string returns an integer (STOI = String to int)
+/// Given a string returns an integer. (STOI = String to int)
 int u_stoi (const std::string &text)
 {
 	unsigned int i;
@@ -88,7 +85,7 @@ int u_stoi (const std::string &text)
 	return sol;
 }
 
-/// Given a string returns an unsigned integer ignoring any other character (STUI = Controlled string to unsigned int)
+/// Given a string returns an unsigned integer ignoring any other character. (STUI = Controlled string to unsigned int)
 unsigned int u_stui (const std::string &text)
 {
 	unsigned int i = 0, sol = 0;
@@ -157,7 +154,25 @@ std::string u_itostr (int number)
 	return sol;
 }
 
-/// Given a text and a separator, returns the number of words separeted by the separator.
+/// Given a string and a separator, erase from the string all the aparitions of the separator.
+void u_eraseAll (std::string &text, const char separator)
+{
+	for (unsigned int i = 0; i < text.length(); i++)
+		if (text[i] == separator) text.erase(i,1);
+}
+
+/// Given a text and a character, returns the number of times that the character appears. (COUNTC = Count Characters)
+unsigned int u_countChar (const std::string &text, const char separator)
+{
+	unsigned int count = 0;
+	
+	for (unsigned int i = 0; i < text.length(); i++)
+		if (text[i] == separator) count++;
+		
+	return count;
+}
+
+/// Given a text and a separator, returns the number of words separeted by the separator. (WORDS = Number of Words)
 /// If comes an string with only the separator it will return 2 (becouse exist two empty sides)
 unsigned int u_words (const std::string &text, const char separator)
 {
@@ -208,25 +223,7 @@ unsigned int u_split (std::string array[], std::string text, const char separato
 	return words;
 }
 
-/// Given an empty array of strings and the text, it will give you an array with one word in each position separated by the default separation ' '.
-/// Also it will return the number of words that he use.
-unsigned int u_split (std::string array[], std::string text)
-{
-	unsigned int count = 0;
-	unsigned int words = u_words (text, ' ');
-	std::size_t found;
-
-	do {
-		found = text.find(' ');
-		array[count] = text.substr (0,found);
-		text.erase(0, found+1);
-		count++;		
-	} while (found != std::string::npos && count < words);
-	
-	return words;
-}
-
-/// Given an empty array of strings, a text, it will give you an array with one word in each position separated by ' '
+/// Given an empty array of strings, a text, it will give you an array with one word in each position separated by ' '.
 /// Also it will return the number of words that he use.
 unsigned int u_split (std::string array[], std::string text)
 {
@@ -278,7 +275,7 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 	return found;
 }
 
-/*int main ()
+int main ()
 {
 	// Problem 1: Obtain the addition of all values separated by a specific symbol (not the others).
 	{
@@ -319,14 +316,17 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 		std::string array[words];
 		
 		u_split (array,text,words,' ');
-		
-		for (unsigned int i = 0; i < words; i++)
-			std::cout << array[i] << "\n";
-		
-		std::cout << u_dsplit(array,words) << "\n";
+			
+		std::cout << "Problem 3: " << u_dsplit(array,words) << "\n";
+	}
+	// Problem 4: Erase all the '_'
+	{
+		std::string text = "_A_l_l_ _r_e_a_d_y_ _a_n_d_ _w_o_r_k_i_n_g_"; // Means "All ready and working"
+		u_eraseAll(text, '_');
+		std::cout << "Problem 4: " << text << "\n";
 	}
 	
 	return 0;
-}*/
+}
 
 #endif
