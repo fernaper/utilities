@@ -32,7 +32,7 @@
 #define _UTILITIES_H
 
 #include <string>
-#include <iostream>
+//#include <iostream>
 
 /// Given two integers (the base and the exponent) returns a to the power of b.
 long int u_exponents(int a, int b)
@@ -275,7 +275,7 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 	return found;
 }
 
-int main ()
+/*int main ()
 {
 	// Problem 1: Obtain the addition of all values separated by a specific symbol (not the others).
 	{
@@ -327,6 +327,6 @@ int main ()
 	}
 	
 	return 0;
-}
+}*/
 
 #endif
