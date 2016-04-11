@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.0.4
+ *	Current version: v0.0.5
  *	______________________________
  *	
  *	COPYRIGHT ©
@@ -204,6 +204,50 @@ unsigned int u_split (std::string array[], std::string text, const char separato
 	return words;
 }
 
+/// Given an empty array of strings and the text, it will give you an array with one word in each position separated by the default separation ' '.
+/// Also it will return the number of words that he use.
+unsigned int u_split (std::string array[], std::string text)
+{
+	unsigned int count = 0;
+	unsigned int words = u_words (text, ' ');
+	std::size_t found;
+
+	do {
+		found = text.find(' ');
+		array[count] = text.substr (0,found);
+		text.erase(0, found+1);
+		count++;		
+	} while (found != std::string::npos && count < words);
+	
+	return words;
+}
+
+/// Given an empty array of strings, a text, it will give you an array with one word in each position separated by ' '
+/// Also it will return the number of words that he use.
+unsigned int u_split (std::string array[], std::string text)
+{
+	return u_split (array, text, ' ');
+}
+
+/// Given an array of strings, the number of words of the array and a separator.
+/// It will return a string with all the array concatenated and separated by the separator.
+std::string u_dsplit (std::string array[], unsigned int count, const char separator)
+{
+	std::string text = array[0];
+	
+	for (unsigned int i = 1; i < count; i++)
+		text = text + separator + array [i];
+	
+	return text;
+}
+
+/// Given an array of strings and the number of words of the array.
+/// It will return a string with all the array concatenated and separated by the default separator ' '.
+std::string u_dsplit (std::string array[], unsigned int count)
+{
+	return u_dsplit (array, count, ' ');
+}
+
 /// Given an array of any type, something that you are searching on the array (Binary Search), the space who we search and an empty postion.
 /// The variable pos returns the position where it is or should be if not found.
 /// The method returns if you found it or not
@@ -229,7 +273,6 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 		
 	return found;
 }
-
 
 /*int main ()
 {
@@ -264,6 +307,19 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 		if (u_search (array, 17, count, pos)) { // We search for the position of the number 17
 			std:: cout << "Problem 2 (b): " << array[pos] << " in the position " << pos << "\n";
 		}
+	}
+	// Problem 3: Split the text into an array and then convert the array to the same string
+	{
+		std::string text = "Whats your name?";
+		unsigned int words = u_words (text, ' ');
+		std::string array[words];
+		
+		u_split (array,text,words,' ');
+		
+		for (unsigned int i = 0; i < words; i++)
+			std::cout << array[i] << "\n";
+		
+		std::cout << u_dsplit(array,words) << "\n";
 	}
 	
 	return 0;
