@@ -33,6 +33,7 @@
 
 #include <string>
 //#include <iostream>
+<<<<<<< HEAD
 
 /// Given a number return its square root.
 /// O = n;
@@ -63,6 +64,8 @@ bool u_prime (int p) {
 			
 	return true;
 }
+=======
+>>>>>>> origin/master
 
 /// Given two integers (the base and the exponent) returns a to the power of b.
 /// O = n;  // n = b
