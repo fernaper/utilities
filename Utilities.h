@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.0.6
+ *	Current version: v0.0.7
  *	______________________________
  *	
  *	COPYRIGHT ©
@@ -33,7 +33,23 @@
 
 #include <string>
 //#include <iostream>
-<<<<<<< HEAD
+
+/// Given a number return the how many digits have this number
+/// O = n; // n = number of digits;
+int u_digits (int number)
+{
+	int digits = 0;
+	
+	if (number < 0)
+		number = -number;
+	
+	while (number > 0) {
+		number /= 10;
+		digits++;
+	}
+	
+	return digits;
+}
 
 /// Given a number return its square root.
 /// O = n;
@@ -64,8 +80,6 @@ bool u_prime (int p) {
 			
 	return true;
 }
-=======
->>>>>>> origin/master
 
 /// Given two integers (the base and the exponent) returns a to the power of b.
 /// O = n;  // n = b
@@ -77,8 +91,17 @@ long int u_exponents(int a, int b)
 		return a*u_exponents(a,b-1);
 }
 
+/// Given a string and an array of chars, it modifies the array con todo el string. (STOC = String to char)
+/// It may fail with error if the array is smaller than the text.
+/// O = n; // n = text.length ()
+void u_stoc (std::string text, char list [])
+{
+	for (unsigned int i = 0; i <= text.length(); i++)
+		list[i] = text[i];
+}
+
 /// Given a string returns an integer ignoring any other character. (CSTOI = Controlled string to int)
-/// O = n; // n = string.length()
+/// O = n; // n = string.length ()
 int u_cstoi (const std::string &text)
 {
 	unsigned int i = 0;
@@ -171,35 +194,77 @@ double u_stod (const std::string &text, const char decimal)
 }
 
 /// Given an integer, return the equivalent string. (ITOSTR = Integer to string)
-/// O = n^2;
+/// O = n + n + n = 3n = n;
 std::string u_itostr (int number)
 {
-	std::string sol = "";
+	int digits = u_digits(number);
 	bool positive = true;
 	
 	if (number < 0) {
 		positive = false;
 		number = -number;
+		digits++;
 	}
 	
+	char text [digits];
+	
+	int i = digits - 1;
 	while (number != 0) {
 		unsigned int digit = number %10;
 		number = number/10;
-		sol = (char)(digit+48) + sol;
+		text[i] = (char)(digit+48);
+		i--;
 	}
+	text[digits] = '\0';
 	
 	if (!positive)
-		sol = '-' + sol;
+		text[0] = '-';
+	std::string sol(text);
 	
 	return sol;
 }
 
 /// Given a string and a separator, erase from the string all the aparitions of the separator.
-/// O = n^2;
-void u_eraseAll (std::string &text, const char separator)
+/// O = n;
+std::string u_eraseAll (const std::string &text, const char separator)
 {
-	for (unsigned int i = 0; i < text.length(); i++)
-		if (text[i] == separator) text.erase(i,1);
+	char list [text.length()+1];
+	unsigned int count = 0;
+	for (unsigned int i = 0; text[i] != '\0'; i++) {
+		if (text[i] != separator) {
+			list[count] = text[i];
+			count++;
+		}
+	}
+	list[count] = '\0';
+	
+	std::string sol(list);
+	
+	return sol;
+}
+
+/// Given a string and a character, return a substring from the first (SUBSTOC = Substring to character)
+/// position (included) to the character (excluded).
+/// O = n;
+std::string u_substoc (const std::string &text, const char character)
+{
+	char list [text.length()+1];
+	unsigned int i = 0;
+	
+	while (text[i] != '\0') {
+		if (text[i] == character) {
+			list[i] = '\0';
+			break;
+		}
+		else {
+			list[i] = text[i];
+			i++;
+		}
+	}
+		
+	std::string sol (list);
+	
+	return sol;
 }
 
 /// Given a text and a character, returns the number of times that the character appears. (COUNTC = Count Characters)
@@ -339,7 +404,7 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 		for (unsigned int i = 0; i < words; i++)
 			op = op + u_cstoi (array[i]);
 			
-		std::cout << "Problem 1: " << op << "\n";
+		std::cout << "Problem 1: " << op << '\n';
 	}
 	// Problem 2: Obtain the position of a value in a generic array.
 	{
@@ -351,11 +416,11 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 		
 		int pos;
 		if (u_search (array, 9, count, pos)) { // We search for the position of the number 9
-			std:: cout << "Problem 2 (a): " << array[pos] << " in the position " << pos << "\n";
+			std:: cout << "Problem 2 (a): " << array[pos] << " in the position " << pos << '\n';
 		}
 		
 		if (u_search (array, 17, count, pos)) { // We search for the position of the number 17
-			std:: cout << "Problem 2 (b): " << array[pos] << " in the position " << pos << "\n";
+			std:: cout << "Problem 2 (b): " << array[pos] << " in the position " << pos << '\n';
 		}
 	}
 	// Problem 3: Split the text into an array and then convert the array to the same string
@@ -366,13 +431,13 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 		
 		u_split (array,text,words,' ');
 			
-		std::cout << "Problem 3: " << u_dsplit(array,words) << "\n";
+		std::cout << "Problem 3: " << u_dsplit(array,words) << '\n';
 	}
 	// Problem 4: Erase all the '_'
 	{
 		std::string text = "_A_l_l_ _r_e_a_d_y_ _a_n_d_ _w_o_r_k_i_n_g_"; // Means "All ready and working"
-		u_eraseAll(text, '_');
-		std::cout << "Problem 4: " << text << "\n";
+		text = u_eraseAll(text, '_');
+		std::cout << "Problem 4: " << text << '\n';
 	}
 	// Problem 5: Given a string, split into strings, parse to numbers and if its no prime show the Square Root of its number
 	{
@@ -382,15 +447,31 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 		
 		u_split (array,text,' ');
 		
-		std::cout << "Problem 4: " << "\n";
+		std::cout << "Problem 5: " << '\n';
 		
 		for (unsigned int i = 0; i < words; i++) {
 			int number = u_cstoi(array[i]);
 			if (!u_prime(number))
-				std::cout << "	   sqrt(" << number << ") = " << u_sqrt(number) << "\n";
+				std::cout << "	   sqrt(" << number << ") = " << u_sqrt(number) << '\n';
 		}
 		
 		std::cout << "\n";
+	}
+	// Problem 6: Given a string, obtain the substring from 0, to the first ',' (if exists), then change from string to an array char
+	// 			  shows the array.
+	{
+		std::string text = "Hello everybody, hi to everyone";
+		std::string subText = u_substoc (text, ',');
+		char list [subText.length()+1];
+		
+		u_stoc (subText, list);
+		
+		std::cout << "Problem 6: ";
+		
+		for (unsigned int i = 0; list[i] != '\0'; i++) {
+			std::cout << list[i];
+		}
+		std::cout << '\n';
 	}
 	
 	return 0;
