@@ -9,7 +9,7 @@
  	By: TheCorPlay
  	With the help of: None
  	E-Mail: thecorplay@gmail.com
- 	Current version: v0.0.7
+ 	Current version: v0.0.8
  	______________________________
  	
             COPYRIGHT ©
@@ -27,7 +27,10 @@
  	
  	 +	Conversions of all possible standard types in both directions.
  	 +	Various types of generic searches.
- 	 +	Remove the include of the library String to make it more independent.
+ 	      + Binary [X]
+ 	      + QuicSort [ ]
+ 	      + Bubble [ ]
+ 	 +	Remove the include of the library String to make it more independent [X].
  	 +	Your ideas.
  	______________________________
   
