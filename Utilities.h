@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.0.7
+ *	Current version: v0.0.8
  *	______________________________
  *	
  *	COPYRIGHT ©
@@ -31,7 +31,6 @@
 #ifndef _UTILITIES_H_
 #define _UTILITIES_H
 
-#include <string>
 //#include <iostream>
 
 /// Given a number return the how many digits have this number
@@ -298,44 +297,77 @@ unsigned int u_words (const std::string &text, const char separator)
 
 /// Given an empty array of strings, a text, the maximum number of words, and the separator, it will give ou an array with one word in each position.
 /// Also it will return the number of words that he use.
-/// O = 3n^2 = n^2;
+/// O = n;
+/**
+	I'm not sure that complexity is actually n.
+	If anyone really knows the complexity tell me.
+	I will explain my question:
+	Although there are two nested loops, each execution makes the inner loop, the outer loop makes an execution less.
+	So far this method converts the linearly.
+	But the construction of string is linear order and is within a loop, however, in the worst case all characters are the separator.
+	Therefore, the construction is constant order (because you only have 1 character)
+
+	Everything leads me to believe that the complexity of the method is of order n, despite seeing a loop within another and a linear method within a loop.
+*/
 unsigned int u_split (std::string array[], std::string text, const unsigned int words, const char separator)
 {
-	unsigned int count = 0;
-	std::size_t found;
+	unsigned int countText = 0, countList = 0, countArray = 0;
 
-	do {
-		found = text.find(separator);
-		array[count] = text.substr (0,found);
-		text.erase(0, found+1);
-		count++;		
-	} while (found != std::string::npos && count < words);
+	while (text[countText] != '\0' && countArray < words) {
+		char list [text.length() - countText + 1];
+		while (countText <= text.length() && text[countText] != separator) {
+			list[countList] = text[countText];
+			countList++;
+			countText++;
+		}
+		list[countList] = '\0';
+		array[countArray] = std::string(list);
+		countArray++;
+		
+		countList = 0;
+		countText++;
+	}
 	
-	return count;
+	if (!countArray) {
+		array[0] = text;
+	}
+	
+	return countArray;
 }
 
 /// Given an empty array of strings, a text, and the separator, it will give you an array with one word in each position.
 /// Also it will return the number of words that he use.
-/// O = 3n^2 = n^2;
+/// O = n;
 unsigned int u_split (std::string array[], std::string text, const char separator)
 {
-	unsigned int count = 0;
 	unsigned int words = u_words (text, separator);
-	std::size_t found;
+	unsigned int countText = 0, countList = 0, countArray = 0;
 
-	do {
-		found = text.find(separator);
-		array[count] = text.substr (0,found);
-		text.erase(0, found+1);
-		count++;		
-	} while (found != std::string::npos && count < words);
+	while (text[countText] != '\0' && countArray < words) {
+		char list [text.length() - countText + 1];
+		while (countText <= text.length() && text[countText] != separator) {
+			list[countList] = text[countText];
+			countList++;
+			countText++;
+		}
+		list[countList] = '\0';
+		array[countArray] = std::string(list);
+		countArray++;
+		
+		countList = 0;
+		countText++;
+	}
 	
-	return words;
+	if (!countArray) {
+		array[0] = text;
+	}
+	
+	return countArray;
 }
 
 /// Given an empty array of strings, a text, it will give you an array with one word in each position separated by ' '.
 /// Also it will return the number of words that he use.
-/// O = 3n^2 = n^2;
+/// O = n;
 unsigned int u_split (std::string array[], std::string text)
 {
 	return u_split (array, text, ' ');
