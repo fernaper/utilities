@@ -299,7 +299,7 @@ unsigned int u_words (const std::string &text, const char separator)
 /// Also it will return the number of words that he use.
 /// O = n;
 /**
-	I'm not sure that complexity is actually n.
+	I'm not sure that the current complexity is of order n.
 	If anyone really knows the complexity tell me.
 	I will explain my question:
 	Although there are two nested loops, each execution makes the inner loop, the outer loop makes an execution less.
