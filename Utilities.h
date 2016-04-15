@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.0.8
+ *	Current version: v0.0.9
  *	______________________________
  *	
  *	COPYRIGHT ©
@@ -88,6 +88,29 @@ long int u_exponents(int a, int b)
 		return 1;
 	else
 		return a*u_exponents(a,b-1);
+}
+
+/// Given a string, return if is a digit or not.
+/** Warning:	If you want co convert from string to int, you don't need to use this method if you use u_cstoi
+ * 				Also you could use u_isDigit and then, if it returns true u_cstoi, but the result will not be
+ *				the same: 	u_cstoi("a1b2c3d") returns and int with 123
+ *							if (u_isDigit("a1b2c3d")) u_stoi ("a1b2c3d") u_isDigit returns
+ *							false therefore does not execute the conversion.
+ **/
+/// O = n; n = string.length ()
+bool u_isDigit (std::string text)
+{
+	unsigned int i = 0;
+	if (text.length() == 0)
+		return false;
+	
+	while (i < text.length()) {
+		if (text[i] > 57 || text[i] < 48)
+			return false;
+		i++;
+	}
+	
+	return true;
 }
 
 /// Given a string and an array of chars, it modifies the array con todo el string. (STOC = String to char)
@@ -311,26 +334,25 @@ unsigned int u_words (const std::string &text, const char separator)
 */
 unsigned int u_split (std::string array[], std::string text, const unsigned int words, const char separator)
 {
-	unsigned int countText = 0, countList = 0, countArray = 0;
-
-	while (text[countText] != '\0' && countArray < words) {
+	unsigned int countText = 0, countArray = 0;
+	
+	while (countArray < words && text[countText] != '\0') {
 		char list [text.length() - countText + 1];
+		unsigned int countList = 0;
+		
 		while (countText <= text.length() && text[countText] != separator) {
 			list[countList] = text[countText];
 			countList++;
 			countText++;
 		}
+		
 		list[countList] = '\0';
 		array[countArray] = std::string(list);
-		countArray++;
-		
-		countList = 0;
 		countText++;
+		countArray++;
 	}
-	
-	if (!countArray) {
+	if (!countArray && text[0] != '\0')
 		array[0] = text;
-	}
 	
 	return countArray;
 }
@@ -340,27 +362,25 @@ unsigned int u_split (std::string array[], std::string text, const unsigned int 
 /// O = n;
 unsigned int u_split (std::string array[], std::string text, const char separator)
 {
-	unsigned int words = u_words (text, separator);
-	unsigned int countText = 0, countList = 0, countArray = 0;
-
-	while (text[countText] != '\0' && countArray < words) {
+	unsigned int countText = 0, countArray = 0, words = u_words (text, separator);
+	
+	while (countArray < words && text[countText] != '\0') {
 		char list [text.length() - countText + 1];
+		unsigned int countList = 0;
+		
 		while (countText <= text.length() && text[countText] != separator) {
 			list[countList] = text[countText];
 			countList++;
 			countText++;
 		}
+		
 		list[countList] = '\0';
 		array[countArray] = std::string(list);
-		countArray++;
-		
-		countList = 0;
 		countText++;
+		countArray++;
 	}
-	
-	if (!countArray) {
+	if (!countArray && text[0] != '\0')
 		array[0] = text;
-	}
 	
 	return countArray;
 }
@@ -375,14 +395,28 @@ unsigned int u_split (std::string array[], std::string text)
 
 /// Given an array of strings, the number of words of the array and a separator.
 /// It will return a string with all the array concatenated and separated by the separator.
-/// O = n^2;
+/// O = n + n + n = 3n = n; // n = Length of the final text
 std::string u_dsplit (std::string array[], unsigned int count, const char separator)
 {
-	std::string text = array[0];
+	if (count == 0)
+		return "";
+
+	unsigned int length = 0, countList = 0;
+	for (unsigned int i = 0; i < count; i++)
+		length += array[i].length() + 1;
 	
-	for (unsigned int i = 1; i < count; i++)
-		text = text + separator + array [i];
+	char list [length+count];
+	for (unsigned int i = 0; i < count; i++) {
+		for (unsigned int auxI = 0; auxI < array[i].length(); auxI++) {
+			list[countList] = array[i][auxI];
+			countList++;
+		}
+		if (countList < (length+count))
+			list[countList] = separator; countList++;
+	}
 	
+	list[countList] = '\0';
+	std::string text (list);
 	return text;
 }
 
