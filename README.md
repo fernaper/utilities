@@ -1,7 +1,7 @@
 # utilities
 	______________________________________________________________________________________________________
   
-												                      LIBRARY
+						 LIBRARY
 
  	External library: Utilities.h
  	______________________________________________________________________________________________________
@@ -12,7 +12,7 @@
  	Current version: v0.0.9
  	______________________________________________________________________________________________________
  	
-											                       COPYRIGHT ©
+                                                COPYRIGHT ©
  
  	This file has copyright assigned.
  	It is free to use, but give credit used.
@@ -23,7 +23,7 @@
  	https://github.com/TheCorPlay
  	______________________________________________________________________________________________________
  	
-											                     FUTURE UPDATES
+                                             FUTURE UPDATES
  	
  	 +	Conversions of all possible standard types in both directions.
  	 +	Various types of generic searches.
