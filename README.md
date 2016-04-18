@@ -9,7 +9,7 @@
  	By: TheCorPlay
  	With the help of: None
  	E-Mail: thecorplay@gmail.com
- 	Current version: v0.0.9
+ 	Current version: v0.1.0
  	______________________________________________________________________________________________________
  	
                                                 COPYRIGHT ©
