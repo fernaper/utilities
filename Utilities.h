@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.0.9
+ *	Current version: v0.1.0
  *	______________________________
  *	
  *	COPYRIGHT ©
@@ -32,6 +32,46 @@
 #define _UTILITIES_H
 
 //#include <iostream>
+
+/// Operator string == char []
+/// O = n;
+bool operator== (const std::string &text, const char list[])
+{
+	unsigned int i = 0;
+	while (list[i] != '\0' && i < text.length()) {
+		if (text[i] != list[i])
+			return false;
+		i++;
+	}
+	
+	if ((list[i] != '\0' && text[i] == '\0') || (list[i] == '\0' && text[i] != '\0'))
+		return false;
+		
+	if (i == text.length())
+		return true;
+	
+	return false;
+}
+
+/// Operator string != char []
+/// O = n;
+bool operator!= (const std::string &text, const char list[])
+{
+	unsigned int i = 0;
+	while (list[i] != '\0' && i < text.length()) {
+		if (text[i] != list[i])
+			return true;
+		i++;
+	}
+	
+	if (i != text.length())
+		return true;
+	
+	if ((list[i] != '\0' && text[i] == '\0') || (list[i] == '\0' && text[i] != '\0'))
+		return true;
+	
+	return false;
+}
 
 /// Given a number return the how many digits have this number
 /// O = n; // n = number of digits;
