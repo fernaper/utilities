@@ -26,7 +26,7 @@
 		It is a much more efficient and convenient method to use, but has to import vector.
  	______________________________________________________________________________________________________
  	
-                                                ## COPYRIGHT ©
+                                                COPYRIGHT ©
  
  	This file has copyright assigned.
  	It is free to use, but give credit used.
@@ -37,7 +37,7 @@
  	https://github.com/TheCorPlay
  	______________________________________________________________________________________________________
  	
-                                             ## FUTURE UPDATES
+                                             FUTURE UPDATES
  	
  	 +	Conversions of all possible standard types in both directions.
  	 +	Various types of generic searches.
@@ -50,7 +50,7 @@
  	 +	Your ideas.
  	______________________________________________________________________________________________________
   
-                                                ## HELP
+                                                HELP
   
 	If you want to help to create a better library send me an e-mail with some code you want to see here.
 	Of course all credits for these methods will be yours.
