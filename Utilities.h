@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.1.0
+ *	Current version: v0.1.1
  *	______________________________
  *	
  *	COPYRIGHT ©
@@ -32,6 +32,15 @@
 #define _UTILITIES_H
 
 //#include <iostream>
+
+/// Given a string and an array of chars, it modifies the array con todo el string. (STOC = String to char)
+/// It may fail with error if the array is smaller than the text.
+/// O = n; // n = text.length ()
+void u_stoc (const std::string &text, char list [])
+{
+	for (unsigned int i = 0; i <= text.length(); i++)
+		list[i] = text[i];
+}
 
 /// Operator string == char []
 /// O = n;
@@ -71,6 +80,38 @@ bool operator!= (const std::string &text, const char list[])
 		return true;
 	
 	return false;
+}
+
+/// Operator. Concatenate a string with other string
+/// O = n;
+std::string operator<< (std::string &text, const std::string &add)
+{
+	char list [text.length()+add.length()+1];
+	u_stoc (text,list);
+	
+	unsigned int j = 0;
+	for (unsigned int i = text.length(); i <= (text.length()+add.length()); i++) {
+		list[i] = add[j];
+		j++;
+	}
+	
+	text = std::string(list);
+	
+	return text;
+}
+
+/// Operator. Concatenate a string with a single char.
+/// O = n;
+std::string operator<< (std::string &text, char add)
+{
+	char list [text.length()+1];
+	u_stoc (text,list);
+	list[text.length()] = add;
+	list[text.length()+1] = '\0';
+	
+	text = std::string(list);
+	
+	return text;
 }
 
 /// Given a number return the how many digits have this number
@@ -151,15 +192,6 @@ bool u_isDigit (std::string text)
 	}
 	
 	return true;
-}
-
-/// Given a string and an array of chars, it modifies the array con todo el string. (STOC = String to char)
-/// It may fail with error if the array is smaller than the text.
-/// O = n; // n = text.length ()
-void u_stoc (std::string text, char list [])
-{
-	for (unsigned int i = 0; i <= text.length(); i++)
-		list[i] = text[i];
 }
 
 /// Given a string returns an integer ignoring any other character. (CSTOI = Controlled string to int)
@@ -462,7 +494,7 @@ std::string u_dsplit (std::string array[], unsigned int count, const char separa
 
 /// Given an array of strings and the number of words of the array.
 /// It will return a string with all the array concatenated and separated by the default separator ' '.
-/// O = n^2;
+/// O = n + n + n = 3n = n; // n = Length of the final text
 std::string u_dsplit (std::string array[], unsigned int count)
 {
 	return u_dsplit (array, count, ' ');
@@ -578,6 +610,30 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 			std::cout << list[i];
 		}
 		std::cout << '\n';
+	}
+	// Problem 7: Compares a string with an array of chars and says "YES" if different, "NO" if equals
+	{
+		std::string text = "Is equals this to this?";
+		char list [] = "Is equals this to this?";
+		
+		std::cout << "Problem 7: ";
+		
+		if (list != text)
+			std::cout << "YES" << '\n';
+		else
+			std::cout << "NO" << '\n';
+	}
+	// Problem 8: Concatenate all the given texts
+	{
+		std::string text = "Problem 8: \n	   Alphabet: ";
+		char add;
+		
+		for (unsigned int i = 0; i < 26; i++) {
+			add = (i + 65);
+			text << add;
+		}
+		
+		std::cout << text << '\n';
 	}
 	
 	return 0;
