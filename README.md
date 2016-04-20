@@ -1,25 +1,25 @@
 # Utilities
 	______________________________________________________________________________________________________
   
-                                                ## LIBRARY
+                                                LIBRARY
 
- 	External library: _UtilitiesV.h_
+ 	External library: UtilitiesV.h
  	______________________________________________________________________________________________________
  
  	By: TheCorPlay
  	With the help of: None
  	E-Mail: thecorplay@gmail.com
- 	Current version: _v0.1.2-beta_
+ 	Current version: v0.1.2-beta
 	______________________________________________________________________________________________________
 	
 	Since the v0.1.2-beta the library Utilities.h change the name to UtilitiesV.h
 	This is because from now on, the library Utilities.h imports the library vector.
 	If you do not want to import the vector library but want to use the library Utilities.h,
 	you have a version available.
-	Currently in _v0.1.1-beta_.
+	Currently in v0.1.1-beta.
 	______________________________________________________________________________________________________
 	
-											   ## CONTRIBUTORS
+											   CONTRIBUTORS
 
 	MANUEL FREIRE MORAN:
 		He created the split method based on vectors rather than arrays.
@@ -32,7 +32,7 @@
  	It is free to use, but give credit used.
   	
  	Example of minimum credits:
- 	Library _Utilities.h_ made by TheCorPlay you can find this and more done for him here:
+ 	Library Utilities.h made by TheCorPlay you can find this and more done for him here:
  
  	https://github.com/TheCorPlay
  	______________________________________________________________________________________________________
