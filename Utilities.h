@@ -4,7 +4,17 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.1.1
+ *	Current version: v0.1.1 - beta
+ *	______________________________
+ *	
+ *	WARNING ABOUT THIS VERSION
+ *
+ *	This is the last version that will not
+ *	import the vector library. This does not
+ *	mean that this version is not supported.
+ *	As I create methods that do not require
+ *	the library vector, I will update
+ *	this version.
  *	______________________________
  *	
  *	COPYRIGHT ©
@@ -29,7 +39,7 @@
  *
 */
 #ifndef _UTILITIES_H_
-#define _UTILITIES_H
+#define _UTILITIES_H_
 
 //#include <iostream>
 
