@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.1.1 - beta
+ *	Current version: v0.1.2 - beta
  *	______________________________
  *	
  *	WARNING ABOUT THIS VERSION
@@ -336,6 +336,25 @@ std::string u_eraseAll (const std::string &text, const char separator)
 	unsigned int count = 0;
 	for (unsigned int i = 0; text[i] != '\0'; i++) {
 		if (text[i] != separator) {
+			list[count] = text[i];
+			count++;
+		}
+	}
+	list[count] = '\0';
+	
+	std::string sol(list);
+	
+	return sol;
+}
+
+/// Given a text and a separator, erase from the string all the aparitions of each character of the separator.
+/// O = n^2; Because it is searching for all the characters in the separator (if you only pass a char it is O = n)
+std::string u_eraseAll (const std::string &text, const std::string &separator)
+{
+	char list [text.length()+separator.length()];
+	unsigned int count = 0;
+	for (unsigned int i = 0; text[i] != '\0'; i++) {
+		if (separator.find (text[i])== std::string::npos) {
 			list[count] = text[i];
 			count++;
 		}
