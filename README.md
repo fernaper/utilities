@@ -1,10 +1,10 @@
 # Utilities
-***
+
   
                                                 LIBRARY
 
  	External library: UtilitiesV.h
-***
+
  
  	By: TheCorPlay
  	E-Mail: thecorplay@gmail.com
@@ -55,4 +55,3 @@
 	Of course all credits for these methods will be yours.
 	Also you could contact me if you find some bugs.
 	It will help a lot.
-	______________________________________________________________________________________________________
