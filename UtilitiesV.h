@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.1.2
+ *	Current version: v0.1.3
  *	______________________________
  *
  *	CONTRIBUTORS
@@ -49,10 +49,14 @@
 /// Given a string and an array of chars, it modifies the array con todo el string. (STOC = String to char)
 /// It may fail with error if the array is smaller than the text.
 /// O = n; // n = text.length ()
-void u_stoc (const std::string &text, char list [])
+std::vector<char> u_stoc (const std::string &text)
 {
-	for (unsigned int i = 0; i <= text.length(); i++)
-		list[i] = text[i];
+	std::vector<char> r;
+	for (unsigned int i = 0; i <= text.length(); i++) {
+		r.push_back(text[i]);
+	}
+	
+	return r;
 }
 
 /// Operator string == char []
@@ -99,16 +103,14 @@ bool operator!= (const std::string &text, const char list[])
 /// O = n;
 std::string operator<< (std::string &text, const std::string &add)
 {
-	char list [text.length()+add.length()+1];
-	u_stoc (text,list);
+	std::vector<char> list = u_stoc (text);
 	
-	unsigned int j = 0;
-	for (unsigned int i = text.length(); i <= (text.length()+add.length()); i++) {
-		list[i] = add[j];
-		j++;
+	list.pop_back();
+
+	for (unsigned int j = 0; j <= +add.length(); j++) {
+		list.push_back (add[j]);
 	}
-	
-	text = std::string(list);
+	text = std::string(list.data());
 	
 	return text;
 }
@@ -117,12 +119,12 @@ std::string operator<< (std::string &text, const std::string &add)
 /// O = n;
 std::string operator<< (std::string &text, char add)
 {
-	char list [text.length()+1];
-	u_stoc (text,list);
-	list[text.length()] = add;
-	list[text.length()+1] = '\0';
+	std::vector<char> list = u_stoc (text);
+	list.pop_back();
+	list.push_back(add);
+	list.push_back ('\0');
 	
-	text = std::string(list);
+	text = std::string(list.data());
 	
 	return text;
 }
@@ -208,7 +210,7 @@ bool u_isDigit (std::string text)
 }
 
 /// Given a string returns an integer ignoring any other character. (CSTOI = Controlled string to int)
-/// O = n; // n = string.length ()
+/// O = n; n = string.length ()
 int u_cstoi (const std::string &text)
 {
 	unsigned int i = 0;
@@ -232,7 +234,8 @@ int u_cstoi (const std::string &text)
 }
 
 /// Given a string returns an integer. (STOI = String to int)
-/// O = n; // n = string.length ()
+/// Warning: If the string have some symbols or letters it will convert it into his ASCII code
+/// O = n; n = string.length ()
 int u_stoi (const std::string &text)
 {
 	unsigned int i;
@@ -252,7 +255,8 @@ int u_stoi (const std::string &text)
 }
 
 /// Given a string returns an unsigned integer ignoring any other character. (STUI = Controlled string to unsigned int)
-/// O = n; // n = string.length()
+/// It only keep the numbers in the string (ignoring the rest).
+/// O = n; n = string.length()
 unsigned int u_stui (const std::string &text)
 {
 	unsigned int i = 0, sol = 0;
@@ -266,7 +270,7 @@ unsigned int u_stui (const std::string &text)
 
 /// Given a string and a char (that char means with what symbol start the decimal part)
 /// returns the equivalents double. (STOD = Controlled string to double)
-/// O = n; // n = string.length()
+/// O = n; n = string.length()
 double u_stod (const std::string &text, const char decimal)
 {
 	unsigned int i = 0, iaux;
@@ -304,6 +308,8 @@ double u_stod (const std::string &text, const char decimal)
 /// O = n + n + n = 3n = n;
 std::string u_itostr (int number)
 {
+	// I do not use a vector here, because the way I'm using to fill the array is
+	// from the end to the beginning (and with a certain size have to calculate first)
 	int digits = u_digits(number);
 	bool positive = true;
 	
@@ -375,7 +381,7 @@ std::string u_substoc (const std::string &text, const char character)
 }
 
 /// Given a text and a character, returns the number of times that the character appears. (COUNTC = Count Characters)
-/// O = n; // n = string.length()
+/// O = n; n = string.length()
 unsigned int u_countChar (const std::string &text, const char separator)
 {
 	unsigned int count = 0;
@@ -386,9 +392,9 @@ unsigned int u_countChar (const std::string &text, const char separator)
 	return count;
 }
 
-/// Given a text and a separator, returns the number of words separeted by the separator. (WORDS = Number of Words)
-/// If comes an string with only the separator it will return 2 (becouse exist two empty sides)
-/// O = n; // n = string.length()
+/// Given a text and a separator, returns the number of words separated by the separator. (WORDS = Number of Words)
+/// If comes an string with only the separator it will return 2 (because exist two empty sides)
+/// O = n; n = string.length()
 unsigned int u_words (const std::string &text, const char separator)
 {
 	unsigned int num = 0, i = 0;
@@ -470,17 +476,10 @@ unsigned int u_split (std::string array[], std::string text, const char separato
 	return countArray;
 }
 
-/// Given an empty array of strings, a text, it will give you an array with one word in each position separated by ' '.
-/// Also it will return the number of words that he use.
-/// O = n;
-unsigned int u_split (std::string array[], std::string text)
-{
-	return u_split (array, text, ' ');
-}
-
 /// Given two strings, the first text that we want to separate and the second separator that will be used
 /// Remember that everything you put character in the separator, will serve as a separator
 /// not searching the concatenation of all in that order.
+/// O = n^2; Because it is searching for all the characters in the separator (if you only pass a char it is O = n)
 std::vector<std::string> u_split(std::string input, std::string separators) {
     std::vector<std::string> r;
     unsigned int wordStart = 0;
@@ -504,22 +503,30 @@ std::vector<std::string> u_split(std::string input, std::string separators) {
     return r;
 }
 
-/*std::string u_dsplit (std::vector<std::string> r, const char separator)
+/// Given a vector and a string (used as separator), concatenate all the vector in a string with each word
+/// is separated by the separator.
+std::string u_dsplit (const std::vector<std::string> &r, const std::string &separator)
 {
-	for (unsigned int i = 0; i < r.size(); i++)	{
-		for (unsigned int j = 0; j < r[i].length(); j++) {
-			listChars.push_back (r[i][j]);
-		}
-		
-		
-	}
+	std::vector<char> text;
 	
-	r.erase(r.begin(),r.end());
-}*/
+	for (std::vector<std::string>::const_iterator iter = r.begin(); iter != r.end(); ++iter) {
+		for (unsigned int i = 0; i < iter->length(); i++) {
+			text.push_back(iter->at(i));
+		}
+		if (++iter != r.end()) // If it is the last
+			for (unsigned int i = 0; i < separator.length(); i++) {
+				text.push_back(separator[i]);
+			}
+		--iter;
+	}
+	text.push_back('\0');
+	
+	return std::string(text.data());
+}
 
 /// Given an array of strings, the number of words of the array and a separator.
 /// It will return a string with all the array concatenated and separated by the separator.
-/// O = n + n + n = 3n = n; // n = Length of the final text
+/// O = n + n + n = 3n = n; n = Length of the final text
 std::string u_dsplit (std::string array[], unsigned int count, const char separator)
 {
 	if (count == 0)
@@ -544,16 +551,8 @@ std::string u_dsplit (std::string array[], unsigned int count, const char separa
 	return text;
 }
 
-/// Given an array of strings and the number of words of the array.
-/// It will return a string with all the array concatenated and separated by the default separator ' '.
-/// O = n + n + n = 3n = n; // n = Length of the final text
-std::string u_dsplit (std::string array[], unsigned int count)
-{
-	return u_dsplit (array, count, ' ');
-}
-
 /// Given an array of any type, something that you are searching on the array (Binary Search), the space who we search and an empty postion.
-/// The variable pos returns the position where it is or should be if not found.
+/// The variable "pos" returns the position where it is or should be if not found.
 /// The method returns if you found it or not
 /// O = log(n);
 template <class TYPE>
@@ -615,13 +614,13 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 	}
 	// Problem 3: Split the text into an array and then convert the array to the same string
 	{
-		std::string text = "Whats your name?";
+		std::string text = "Are you ready?";
 		unsigned int words = u_words (text, ' ');
 		std::string array[words];
 		
 		u_split (array,text,words,' ');
 			
-		std::cout << "Problem 3: " << u_dsplit(array,words) << '\n';
+		std::cout << "Problem 3: " << u_dsplit(array,words, ' ') << '\n';
 	}
 	// Problem 4: Erase all the '_'
 	{
@@ -652,9 +651,8 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 	{
 		std::string text = "Hello everybody, hi to everyone";
 		std::string subText = u_substoc (text, ',');
-		char list [subText.length()+1];
 		
-		u_stoc (subText, list);
+		std::vector<char> list = u_stoc (subText);
 		
 		std::cout << "Problem 6: ";
 		
@@ -667,7 +665,6 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 	{
 		std::string text = "Is equals this to this?";
 		char list [] = "Is equals this to this?";
-		
 		std::cout << "Problem 7: ";
 		
 		if (list != text)
@@ -677,7 +674,7 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 	}
 	// Problem 8: Concatenate all the given texts
 	{
-		std::string text = "Problem 8: \n	   Alphabet: ";
+		std::string text = "Problem 8: ";
 		char add;
 		
 		for (unsigned int i = 0; i < 26; i++) {
@@ -687,17 +684,23 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 		
 		std::cout << text << '\n';
 	}
-	// Problem 9: Work with the new u_split, working with vectors.
+	// Problem 9: Concatenate string with other string
 	{
-		std::string text = "Whats your name?";
+		std::string text = "Problem 9: Whats your";
+		text << " name?\n";
+		
+		std::cout << text;
+	}
+	// Problem 10: Work with the new u_split, working with vectors.
+	{
+		std::string text = "Hello my name is Fernando";
 		std::vector<std::string> vector;
 		
 		vector = u_split (text, " ");
 			
-		std::cout << "Problem 9: " << '\n';
+		std::cout << "Problem 10: ";
 		
-		for (unsigned int i = 0; i < vector.size(); i++)
-			std:: cout << vector[i] << ' ';
+		std::cout << u_dsplit (vector, " - ") << '\n';
 	}
 	
 	return 0;
