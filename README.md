@@ -1,29 +1,29 @@
 # Utilities
-	______________________________________________________________________________________________________
+***
   
                                                 LIBRARY
 
  	External library: UtilitiesV.h
- 	______________________________________________________________________________________________________
+***
  
  	By: TheCorPlay
  	E-Mail: thecorplay@gmail.com
  	Current version: v0.1.4-beta
-	______________________________________________________________________________________________________
+***
 	
 	Since the v0.1.2-beta the library Utilities.h change the name to UtilitiesV.h
 	This is because from now on, the library Utilities.h imports the library vector.
 	If you do not want to import the vector library but want to use the library Utilities.h,
 	you have a version available.
 	Currently in v0.1.1-beta.
-	______________________________________________________________________________________________________
+***
 	
 											   CONTRIBUTORS
 
 	MANUEL FREIRE MORAN:
 		He created the split method based on vectors rather than arrays.
 		It is a much more efficient and convenient method to use, but has to import vector.
- 	______________________________________________________________________________________________________
+***
  	
                                                 COPYRIGHT ©
  
@@ -34,7 +34,7 @@
  	Library Utilities.h made by TheCorPlay you can find this and more done for him here:
  
  	https://github.com/TheCorPlay
- 	______________________________________________________________________________________________________
+***
  	
                                              FUTURE UPDATES
  	
@@ -47,7 +47,7 @@
 	 +	Generally trying to accept all methods with vector to improve efficiency. [X]
 	 +	Also, in the process of removing methods that do not make sense now. [X]
  	 +	Your ideas.
- 	______________________________________________________________________________________________________
+***
   
                                                 HELP
   
