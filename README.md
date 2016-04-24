@@ -8,7 +8,7 @@
  
  	By: TheCorPlay
  	E-Mail: thecorplay@gmail.com
- 	Current version: v0.1.3-beta
+ 	Current version: v0.1.4-beta
 	______________________________________________________________________________________________________
 	
 	Since the v0.1.2-beta the library Utilities.h change the name to UtilitiesV.h
