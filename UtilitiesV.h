@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.1.3
+ *	Current version: v0.1.4
  *	______________________________
  *
  *	CONTRIBUTORS
@@ -31,13 +31,15 @@
  *	
  *	FUTURE UPDATES
  *	
- *	 +	Conversions of all possible
- *		standard types in both directions.
- *	 +	Various types of generic searches (Binary done).
- *	 +	New u_eraseAll() but with an String (not only a char).
- *	 +	Right now working in a u_dsplit that works with vectors.
- *	 +	Generally trying to accept all methods with vector to improve efficiency
- *	 +	Also, in the process of removing methods that do not make sense now
+ *	 +	Conversions of all possible standard types in both directions. [ ]
+ *	 +	Various types of generic searches. [ ]
+ *	 	 +	Binary [X]
+ *	 	 +	Bubble [ ]
+ *		 +	QuickSort [ ]
+ *	 +	New u_eraseAll() but with an String (not only a char). [X]
+ *	 +	Right now working in a u_dsplit that works with vectors. [X]
+ *	 +	Generally trying to accept all methods with vector to improve efficiency. [X]
+ *	 +	Also, in the process of removing methods that do not make sense now. [X]
  *
 */
 #ifndef _UTILITIESV_H_
@@ -341,17 +343,32 @@ std::string u_itostr (int number)
 /// O = n;
 std::string u_eraseAll (const std::string &text, const char separator)
 {
-	char list [text.length()+1];
-	unsigned int count = 0;
+	std::vector<char> list;
 	for (unsigned int i = 0; text[i] != '\0'; i++) {
 		if (text[i] != separator) {
-			list[count] = text[i];
-			count++;
+			list.push_back(text[i]);
 		}
 	}
-	list[count] = '\0';
+	list.push_back('\0');
 	
-	std::string sol(list);
+	std::string sol(list.data());
+	
+	return sol;
+}
+
+/// Given a text and a separator, erase from the string all the aparitions of each character of the separator.
+/// O = n^2; Because it is searching for all the characters in the separator (if you only pass a char it is O = n)
+std::string u_eraseAll (const std::string &text, const std::string &separator)
+{
+	std::vector<char> list;
+	
+	for (unsigned int i = 0; text[i] != '\0'; i++) {
+		if (separator.find(text[i]) == std::string::npos)
+			list.push_back (text[i]);
+	}
+	list.push_back('\0');
+	
+	std::string sol(list.data());
 	
 	return sol;
 }
@@ -624,8 +641,8 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 	}
 	// Problem 4: Erase all the '_'
 	{
-		std::string text = "_A_l_l_ _r_e_a_d_y_ _a_n_d_ _w_o_r_k_i_n_g_"; // Means "All ready and working"
-		text = u_eraseAll(text, '_');
+		std::string text = "_-A,_-l,_-l,_- ,_-r,_-e,_-a,_-d,_-y,_- ,_-a,_-n,_-,d-_,- ,_-,w,_-o,_-r,_-k,_-i,_-n,_-g,_-"; // Means "All ready and working"
+		text = u_eraseAll(text, "_-,");
 		std::cout << "Problem 4: " << text << '\n';
 	}
 	// Problem 5: Given a string, split into strings, parse to numbers and if its no prime show the Square Root of its number
