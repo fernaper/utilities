@@ -43,7 +43,7 @@
 
 //#include <iostream>
 
-/// Given a string and an array of chars, it modifies the array con todo el string. (STOC = String to char)
+/// Given a string and an array of chars, it modifies the array with all string. (STOC = String to char)
 /// It may fail with error if the array is smaller than the text.
 /// O = n; // n = text.length ()
 void u_stoc (const std::string &text, char list [])
@@ -419,7 +419,7 @@ unsigned int u_words (const std::string &text, const char separator)
 	return num;
 }
 
-/// Given an empty array of strings, a text, the maximum number of words, and the separator, it will give ou an array with one word in each position.
+/// Given an empty array of strings, a text, the maximum number of words, and the separator, it will give out an array with one word in each position.
 /// Also it will return the number of words that he use.
 /// O = n;
 /**
