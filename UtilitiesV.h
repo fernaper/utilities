@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.1.4
+ *	Current version: v0.1.5
  *	______________________________
  *
  *	CONTRIBUTORS
@@ -355,7 +355,6 @@ std::string u_eraseAll (const std::string &text, const char separator)
 	
 	return sol;
 }
-
 /// Given a text and a separator, erase from the string all the aparitions of each character of the separator.
 /// O = n^2; Because it is searching for all the characters in the separator (if you only pass a char it is O = n)
 std::string u_eraseAll (const std::string &text, const std::string &separator)
@@ -573,8 +572,31 @@ std::string u_dsplit (std::string array[], unsigned int count, const char separa
 /// The method returns if you found it or not
 /// O = log(n);
 template <class TYPE>
-bool u_search(TYPE list[], TYPE search, int count, int &pos) {
-  int start = 0, end = count - 1, half;
+bool u_search(TYPE list[], TYPE search, unsigned int count, unsigned int &pos) {
+  unsigned int start = 0, end = count - 1, half;
+  bool found = false;
+
+	while ((start <= end) && !found) {
+		half = (start + end) / 2;
+		if (search == list[half])
+			found = true;
+		else if (search < list[half])
+			end = half - 1;
+		else
+			start = half + 1;
+	}
+	
+	if (found)
+		pos = half;
+	else
+		pos = start;
+		
+	return found;
+}
+
+template <class TYPE>
+bool u_search(std::vector<TYPE> list, TYPE search, unsigned int &pos) {
+  unsigned int start = 0, end = list.size() - 1, half;
   bool found = false;
 
 	while ((start <= end) && !found) {
@@ -620,7 +642,7 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 		for (unsigned int i = 0; i < count; i++)
 			array[i] = i*3; // [ 0 3 6 9 12 15 18 21 24 27]
 		
-		int pos;
+		unsigned int pos;
 		if (u_search (array, 9, count, pos)) { // We search for the position of the number 9
 			std:: cout << "Problem 2 (a): " << array[pos] << " in the position " << pos << '\n';
 		}
@@ -718,6 +740,22 @@ bool u_search(TYPE list[], TYPE search, int count, int &pos) {
 		std::cout << "Problem 10: ";
 		
 		std::cout << u_dsplit (vector, " - ") << '\n';
+	}
+	// Problem 11: Binary search for vectors.
+	{
+		std::vector<int> vector;
+		unsigned int pos;
+		
+		for (unsigned int i = 0; i < 20; i++) {
+			vector.push_back(i*2);
+		}
+		
+		u_search (vector, 2, pos);
+		
+		std::cout << "Problem 11: vector [" << pos << "] = 2\n";
+		
+		if (!u_search (vector, 17, pos))
+			std::cout << "	    If exists, it will be here: vector[" << pos << "] = 17\n";
 	}
 	
 	return 0;
