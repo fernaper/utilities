@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.1.5
+ *	Current version: v0.1.6
  *	______________________________
  *
  *	CONTRIBUTORS
@@ -31,7 +31,7 @@
  *	
  *	FUTURE UPDATES
  *	
- *	 +	Conversions of all possible standard types in both directions. [ ]
+ *	 +	Conversions of all possible standard types in both directions. [X]
  *	 +	Various types of generic searches. [ ]
  *	 	 +	Binary [X]
  *	 	 +	Bubble [ ]
@@ -45,7 +45,7 @@
 #ifndef _UTILITIESV_H_
 #define _UTILITIESV_H_
 
-//#include <iostream>
+#include <iostream>
 #include <vector>
 
 /// Given a string and an array of chars, it modifies the array con todo el string. (STOC = String to char)
@@ -394,6 +394,27 @@ std::string u_substoc (const std::string &text, const char character)
 	std::string sol (list);
 	
 	return sol;
+}
+
+/// Given a text with which we work, a separator and a text to be inserted.
+/// When it detects a character in the text where we work, found in the separator adds after that character, the separator text.
+/// O (n^3); n^3 = text.length() * separator.length() * insert.length()
+/// Most of the time , insert.length ( ) == 1 and separator.length() is a sort string. So its near to O(n).
+std::string u_insertSeparator (const std::string &text, const std::string &insert, const std::string separator) {
+	std::vector<char> r;
+	
+	for (unsigned int i = 0; i <= text.length(); i++) {
+		r.push_back(text[i]);
+		
+		if (separator.find(text[i]) != std::string::npos)
+		{
+			for (unsigned int j = 0; j < insert.length(); j++) {
+				r.push_back(insert[j]);
+			}
+		}
+	}
+	
+	return std::string(r.data());
 }
 
 /// Given a text and a character, returns the number of times that the character appears. (COUNTC = Count Characters)
@@ -756,6 +777,10 @@ bool u_search(std::vector<TYPE> list, TYPE search, unsigned int &pos) {
 		
 		if (!u_search (vector, 17, pos))
 			std::cout << "	    If exists, it will be here: vector[" << pos << "] = 17\n";
+	}
+	// Problem 12: Test if the separator works well
+	{		
+		std::cout << u_insertSeparator ("if (imBeautiful) {\nI'll find a woman\nAnd that will be the beginning\nof my new life", "-->", "\no") << "\n}\n";
 	}
 	
 	return 0;
