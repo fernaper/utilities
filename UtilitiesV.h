@@ -131,6 +131,24 @@ std::string operator<< (std::string &text, char add)
 	return text;
 }
 
+/// Given a number (not bigger than 93) it returns the number of fibbonaci of said number.
+/// It makes use of the principles of dynamic programming to make it much more efficient
+unsigned long long int u_fibonacci (int n) {
+	if (n <= 0)
+		return 0;
+	
+	unsigned long long int *fib = new unsigned long long int[n];
+	
+	fib[0] = 1;
+	fib[1] = 1;
+	for (int i = 2; i < n; i++)
+		fib[i] = fib[i-1] + fib[i-2];
+	
+	unsigned long long int r = fib[n-1];
+	delete[] fib;
+	return r;
+}
+
 /// Given a number return the how many digits have this number
 /// O = n; // n = number of digits;
 int u_digits (int number)
@@ -781,6 +799,10 @@ bool u_search(std::vector<TYPE> list, TYPE search, unsigned int &pos) {
 	// Problem 12: Test if the separator works well
 	{		
 		std::cout << u_insertSeparator ("if (imBeautiful) {\nI'll find a woman\nAnd that will be the beginning\nof my new life", "-->", "\no") << "\n}\n";
+	}
+	// Problem 13: Test of fibonacci
+	{
+		std::cout << "Problem 12: Fibonacci\nu_fibonacci(93) = " << u_fibonacci(93) << '\n';
 	}
 	
 	return 0;
