@@ -7,7 +7,7 @@
 
  
  	By: TheCorPlay
- 	E-Mail: thecorplay@gmail.com
+ 	E-Mail: fernaperg@gmail.com
  	Current version: v0.1.6 - RC (Release Candidate)
 ***
 	
@@ -21,7 +21,7 @@
 ## CONTRIBUTORS
 
 	MANUEL FREIRE MORAN:
-		He created the split method based on vectors rather than arrays.
+		He created part of the split method based on vectors rather than arrays.
 		It is a much more efficient and convenient method to use, but has to import vector.
 ***
  	
@@ -31,7 +31,7 @@
  	It is free to use, but give credit used.
   	
  	Example of minimum credits:
- 	Library Utilities.h made by TheCorPlay you can find this and more done for him here:
+ 	Library Utilities.h made by Fernando Pérez you can find this and more done for him here:
  
  	https://github.com/TheCorPlay
 ***
