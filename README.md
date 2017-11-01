@@ -29,11 +29,13 @@
  
  	This file has copyright assigned.
  	It is free to use, but give credit used.
-  	
+	
  	Example of minimum credits:
  	Library Utilities.h made by Fernando Pérez you can find this and more done for him here:
  
  	https://github.com/TheCorPlay
+	
+	Look at the file [**LICENSE.md**](https://github.com/TheCorPlay/utilities/blob/master/LICENSE) for more information.
 ***
  	
 ## FUTURE UPDATES
