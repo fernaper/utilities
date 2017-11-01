@@ -8,7 +8,7 @@
  
  	By: TheCorPlay
  	E-Mail: fernaperg@gmail.com
- 	Current version: v0.1.6 - RC (Release Candidate)
+ 	Current version: v0.1.7 - RC (Release Candidate)
 ***
 	
 	Since the v0.1.2-beta the library Utilities.h change the name to UtilitiesV.h
@@ -35,7 +35,7 @@
  
  	https://github.com/TheCorPlay
 	
-	Look at the file [**LICENSE.md**](https://github.com/TheCorPlay/utilities/blob/master/LICENSE) for more information.
+	Look at the file [LICENSE.md](LICENSE.md) for more information.
 ***
  	
 ## FUTURE UPDATES
