@@ -6,7 +6,7 @@
  	External library: UtilitiesV.h
 
  
- 	By: TheCorPlay
+ 	By: Fernando Pérez
  	E-Mail: fernaperg@gmail.com
  	Current version: v0.1.7 - RC (Release Candidate)
 ***
