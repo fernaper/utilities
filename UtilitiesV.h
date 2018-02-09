@@ -4,7 +4,7 @@
  *
  *	By: TheCorPlay
  *	E-Mail: thecorplay@gmail.com
- *	Current version: v0.1.6
+ *	Current version: v0.2.0
  *	______________________________
  *
  *	CONTRIBUTORS
@@ -183,6 +183,10 @@ double u_sqrt (int number)
 /// Returns if a given integer number its prime or not.
 /// O = n; // n = log(n)
 bool u_prime (int p) {
+	if (!((p-1)/6.0 == (p-1)/6) && !((p+1)/6.0 ==(p+1)/6) && p > 3) {
+		return false;
+	}
+	
 	if (p < 0)
 		p = -p;
 	
