@@ -8,7 +8,7 @@
  
  	By: Fernando Pérez
  	E-Mail: fernaperg@gmail.com
- 	Current version: v0.1.7 - RC (Release Candidate)
+ 	Current version: v0.2.0 - Release
 ***
 	
 	Since the v0.1.2-beta the library Utilities.h change the name to UtilitiesV.h
